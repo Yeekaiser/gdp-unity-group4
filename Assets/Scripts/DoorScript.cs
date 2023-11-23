@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    SoundMeter soundMeter;
     public float doorOpenDelay = 15f;
     public float noiseMadeByDoorSlam;
     public float timeToFullyOpenDoor;
     public bool doorIsOpen;
     public bool doorFinishedOpening;
+    public float noiselevel;
 
 
     [HideInInspector]
@@ -65,6 +67,7 @@ public class DoorScript : MonoBehaviour
         //    {
         //    Sound a = new Sound();
         //    a.currentNoise += 10;
+        noiselevel = soundMeter.currentNoise;
         }
     }
 }

@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sound
-{
-    public float currentNoise = 0;
-}
+
 public class SoundMeter : MonoBehaviour
 {
+    public float currentNoise = 0;
     private Image rectangle;
     private const float MAX_SOUND = 100f;
     public float sound = MAX_SOUND;
