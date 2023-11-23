@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timePassed: 0
   currentTime: 0
-  doorOpenDelay: 10
+  doorOpenDelay: 15
   doorIsOpen: 0
   anim: {fileID: 0}
 --- !u!1001 &2085548273

@@ -5,8 +5,8 @@ using UnityEngine;
 public class DoorScript : MonoBehaviour
 {
     public float timePassed;
-    public float currentTime;
-    public float doorOpenDelay = 10f;
+    public float doorOpenedTime;
+    public float doorOpenDelay = 15f;
 
     public bool doorIsOpen;
     [HideInInspector]
@@ -34,8 +34,10 @@ public class DoorScript : MonoBehaviour
         else
         {
             //set noise levels up
+            //noiseScript.noiseLevel += 10f;
             anim.SetTrigger("doorClose");
+            doorIsOpen= false;
         }
-
+        
     }
 }
