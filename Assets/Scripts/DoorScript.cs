@@ -11,13 +11,15 @@ public class DoorScript : MonoBehaviour
     public bool doorIsOpen;
     public bool doorFinishedOpening;
     public float noiselevel;
+    public float playervel = 0f;
+
 
 
     [HideInInspector]
     public float timePassed;
     [HideInInspector]
     public float doorOpenedTime;
-    
+
 
     [HideInInspector]
     public Animator anim;
@@ -32,28 +34,28 @@ public class DoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void DoorOpen()
     {
         if (!doorIsOpen)
         {
-        anim.SetTrigger("doorOpen");
-        doorIsOpen = true;
+            anim.SetTrigger("doorOpen");
+            doorIsOpen = true;
         }
         else
         {
-            if(doorFinishedOpening)
+            if (doorFinishedOpening)
             {
                 //set noise levels up
                 //noiseScript.noiseLevel += noiseMadeByDoorSlam;
                 anim.SetTrigger("doorClose");
-                doorIsOpen= false;
+                doorIsOpen = false;
             }
-                
+
         }
-        
+
     }
 
     void DoorClose()
@@ -63,11 +65,9 @@ public class DoorScript : MonoBehaviour
         //SoundMeter.currentNoise += noiseMadeByDoorSlam;
         anim.SetTrigger("doorClose");
         doorIsOpen = false;
-        //if playervel > 100
-        //    {
-        //    Sound a = new Sound();
-        //    a.currentNoise += 10;
-        noiselevel = soundMeter.currentNoise;
+        if (playervel >= 50)
+            {
+            soundMeter.currentNoise += 10;
         }
     }
 }

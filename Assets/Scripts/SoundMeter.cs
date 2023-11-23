@@ -19,8 +19,6 @@ public class SoundMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Sound a = new Sound();
-        float currentNoise = a.currentNoise;
         rectangle.fillAmount = currentNoise / MAX_SOUND;
     }
 }
