@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    public float timePassed;
-    public float doorOpenedTime;
     public float doorOpenDelay = 15f;
-
+    public float noiseMadeByDoorSlam;
+    public float timeToFullyOpenDoor;
     public bool doorIsOpen;
+    public bool doorFinishedOpening;
+
+
+    [HideInInspector]
+    public float timePassed;
+    [HideInInspector]
+    public float doorOpenedTime;
+    
+
     [HideInInspector]
     public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        //timeToFullyOpenDoor = anim.time
         InvokeRepeating("DoorOpen", 0f, doorOpenDelay);
     }
 
@@ -33,11 +42,24 @@ public class DoorScript : MonoBehaviour
         }
         else
         {
-            //set noise levels up
-            //noiseScript.noiseLevel += 10f;
-            anim.SetTrigger("doorClose");
-            doorIsOpen= false;
+            if(doorFinishedOpening)
+            {
+                //set noise levels up
+                //noiseScript.noiseLevel += noiseMadeByDoorSlam;
+                anim.SetTrigger("doorClose");
+                doorIsOpen= false;
+            }
+                
         }
         
+    }
+
+    void DoorClose()
+    {
+        //play audio
+        //set noise level up
+        //SoundMeter.currentNoise += noiseMadeByDoorSlam;
+        anim.SetTrigger("doorClose");
+        doorIsOpen = false;
     }
 }
