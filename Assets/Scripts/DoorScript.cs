@@ -61,5 +61,10 @@ public class DoorScript : MonoBehaviour
         //SoundMeter.currentNoise += noiseMadeByDoorSlam;
         anim.SetTrigger("doorClose");
         doorIsOpen = false;
+        //if playervel > 100
+        //    {
+        //    Sound a = new Sound();
+        //    a.currentNoise += 10;
+        }
     }
 }
