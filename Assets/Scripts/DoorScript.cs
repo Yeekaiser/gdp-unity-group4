@@ -7,12 +7,13 @@ public class DoorScript : MonoBehaviour
     SoundMeter soundMeter;
     public float doorOpenDelay = 15f;
     public float noiseMadeByDoorSlam;
-    public float timeToFullyOpenDoor;
-    public bool doorIsOpen;
+    public float doorFullyOpenTime;
+    public bool doorIsOpen = false;
     public bool doorFinishedOpening;
     public float noiselevel;
     public float playervel = 0f;
 
+    SoundMeter sound;
 
 
     [HideInInspector]
@@ -28,7 +29,7 @@ public class DoorScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         //timeToFullyOpenDoor = anim.time
-        InvokeRepeating("DoorOpen", 0f, doorOpenDelay);
+        InvokeRepeating("DoorState", 0f, doorOpenDelay);
     }
 
     // Update is called once per frame
@@ -37,32 +38,33 @@ public class DoorScript : MonoBehaviour
 
     }
 
-    void DoorOpen()
+    void DoorState()
     {
-        if (!doorIsOpen)
+        if (doorIsOpen == false)
         {
-            anim.SetTrigger("doorOpen");
-            doorIsOpen = true;
+            DoorStartToOpen();
         }
         else
         {
-            if (doorFinishedOpening)
-            {
-                //set noise levels up
-                //noiseScript.noiseLevel += noiseMadeByDoorSlam;
-                anim.SetTrigger("doorClose");
-                doorIsOpen = false;
-            }
-
+            DoorSlamClose();
         }
-
     }
 
-    void DoorClose()
+    void DoorStartToOpen()
+    {
+        anim.SetTrigger("doorOpen");
+        doorIsOpen = true;
+        if (timePassed >= doorFullyOpenTime) 
+        {
+            doorFinishedOpening = true;
+        }
+    }
+
+    void DoorSlamClose()
     {
         //play audio
         //set noise level up
-        //SoundMeter.currentNoise += noiseMadeByDoorSlam;
+        sound.currentNoise += noiseMadeByDoorSlam;
         anim.SetTrigger("doorClose");
         doorIsOpen = false;
         if (playervel >= 50)
