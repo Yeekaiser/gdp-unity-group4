@@ -6,7 +6,7 @@ public class PlayerPickUp : MonoBehaviour
 {
     private GameObject itemInHand;
     private bool isTouching = false;
-
+    
     void Update()
     {
         if (Input.touchCount > 0)
