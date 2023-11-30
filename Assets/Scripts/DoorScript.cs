@@ -14,9 +14,10 @@ public class DoorScript : MonoBehaviour
     public bool doorFinishedOpening;
     
     public float playervel = 0f;
-    //public float rotSpeed;
+    public float rotSpeed = 1f;
 
-    public float targetRotation = 90f;
+    public float targetRotation = -90f;
+    public float originalRotation = 0f;
     new private HingeJoint hingeJoint;
 
     [HideInInspector]
@@ -39,7 +40,7 @@ public class DoorScript : MonoBehaviour
     {
         if (doorIsOpen == true)
         {
-            //DoorRotate();
+            DoorRotate();
         }
         timePassed += Time.deltaTime;
     }
@@ -60,9 +61,10 @@ public class DoorScript : MonoBehaviour
     void DoorStartToOpen()
     {
         Debug.Log("DoorStartToOpen called");
+        DoorRotate();
         //anim.SetTrigger("doorOpen");
         doorIsOpen = true;
-        if (hingeJoint.angle == 90) 
+        if (hingeJoint.angle == -90) 
         {
             doorFinishedOpening = true;
         }
@@ -72,6 +74,11 @@ public class DoorScript : MonoBehaviour
     {
         Debug.Log("DoorSlamClose called");
         sound.currentNoise += noiseMadeByDoorSlam;
+        float angleDifference = originalRotation - hingeJoint.angle;
+
+        JointMotor motor = hingeJoint.motor;
+        motor.targetVelocity = Mathf.Sign(angleDifference) * rotSpeed;
+        hingeJoint.motor = motor;
 
         //anim.SetTrigger("doorClose");
         doorIsOpen = false;
@@ -81,12 +88,13 @@ public class DoorScript : MonoBehaviour
         }
     }
 
-    //void DoorRotate()
-    //{
-    //    float angleDifference = targetRotation - hingeJoint.angle;
+    void DoorRotate()
+    {
+        Debug.Log("DoorRotate called");
+        float angleDifference = targetRotation - hingeJoint.angle;
 
-    //    JointMotor motor = hingeJoint.motor;
-    //    motor.targetVelocity = Mathf.Sign(angleDifference) * rotSpeed;
-    //    hingeJoint.motor = motor;
-    //}
+        JointMotor motor = hingeJoint.motor;
+        motor.targetVelocity = Mathf.Sign(angleDifference) * rotSpeed;
+        hingeJoint.motor = motor;
+    }
 }
