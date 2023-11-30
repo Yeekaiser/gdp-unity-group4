@@ -78,6 +78,6 @@ public class FPSController : MonoBehaviour
 
         #endregion
         playervel = curSpeedX + curSpeedY;
-        doorScript.playervel = playervel;
+        //doorScript.playervel = playervel;
     }
 }

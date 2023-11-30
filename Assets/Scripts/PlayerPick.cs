@@ -21,13 +21,17 @@ public class PlayerPick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0))
         {
             if (heldObj == null) 
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
+                //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * pickUpRange, Color.green);
+                //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange))
+                if (Physics.BoxCast(transform.position, new Vector3(3, 3, 6), Vector3.forward, out hit))
                 {
+                    Debug.Log(hit.transform.gameObject.name);
                     if (hit.transform.gameObject.tag == "canPickUp")//tag things to canPickUp
                     {
                         PickUpObject(hit.transform.gameObject);
@@ -128,5 +132,11 @@ public class PlayerPick : MonoBehaviour
             heldObj.transform.position = transform.position + new Vector3(0f, -0.5f, 0f); //offset slightly downward to stop object dropping above player 
             //if your player is small, change the -0.5f to a smaller number (in magnitude) ie: -0.1f
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3(3, 3, 6));
     }
 }
