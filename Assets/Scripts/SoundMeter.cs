@@ -14,11 +14,20 @@ public class SoundMeter : MonoBehaviour
     void Start()
     {
         rectangle = GetComponent<Image>();
+        InvokeRepeating("decreaseSound", 1.0f, 1.0f);
     }
-
+   
     // Update is called once per frame
     void Update()
     {
         rectangle.fillAmount = currentNoise / MAX_SOUND;
     }
+    void decreaseSound()
+    {
+        if (currentNoise > 0)
+        {
+            currentNoise -= 0.5f;
+        }
+    }
+
 }

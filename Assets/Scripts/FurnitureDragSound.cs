@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class FurnitureDragSound : MonoBehaviour
 {
-    SoundMeter sound;
+    public SoundMeter sound;
     public Rigidbody rb;
 
-    private bool isGrounded;
+    public bool isGrounded;
     public float noiseMadeByDragging;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -25,9 +25,13 @@ public class FurnitureDragSound : MonoBehaviour
         isGrounded = Physics.BoxCast(transform.position, transform.lossyScale/2, transform.forward, out hit, transform.rotation, maxDistance, 3);
         if(rb.velocity.magnitude >= 1)
             if (isGrounded)
-            {
+            {   
                 Debug.Log(gameObject.name + "On the Ground");
-                sound.currentNoise += noiseMadeByDragging;
+                noiseMadeByDragging = rb.velocity.magnitude * 3f;
+                if (noiseMadeByDragging > 10)   
+                    noiseMadeByDragging = 10;
+                sound.currentNoise += noiseMadeByDragging * Time.deltaTime;
+                Debug.Log(sound.currentNoise);
             }
     }
 }
