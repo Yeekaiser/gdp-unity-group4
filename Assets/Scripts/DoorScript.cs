@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    [SerializeField]
     private SoundMeter sound;
     public float noiseMadeByDoorSlam;
 
-    public float doorOpenDelay = 15f;
+    public float doorSlamDelay = 15f;
     public float timeToFullyOpenDoor;
 
     public bool doorIsOpen = false;
     public bool doorFinishedOpening;
     
     public float playervel = 0f;
-    public float rotSpeed = 1f;
+    public float openSpeed = -10f;
+    public float closeSpeed = -100f;
 
     public float targetRotation = -90f;
     public float originalRotation = 0f;
@@ -32,28 +34,26 @@ public class DoorScript : MonoBehaviour
     {
         hingeJoint = GetComponent<HingeJoint>();
         anim = GetComponent<Animator>();
-        InvokeRepeating("DoorState", 0f, doorOpenDelay);    //calls DoorState() every doorOpenDelay seconds - door will either slam or open every 10 sec
+        //InvokeRepeating("DoorState", 0f, doorOpenDelay);    //calls DoorState() every doorOpenDelay seconds - door will either slam or open every 10 sec
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (doorIsOpen == true)
-        {
-            DoorRotate();
-        }
-        timePassed += Time.deltaTime;
+        DoorState();
     }
 
     void DoorState()
     {
-        Debug.Log("doorState called");
-        if (doorIsOpen == false)
+        //Debug.Log("doorState called");
+        Debug.Log("hingejoint angle = " + hingeJoint.angle);
+        if (hingeJoint.angle >= 0)
         {
             DoorStartToOpen();
         }
-        else if(doorFinishedOpening == true)
+        else if(hingeJoint.angle == -90)
         {
+            //Invoke("DoorSlamClose", doorSlamDelay);
             DoorSlamClose();
         }
     }
@@ -62,39 +62,50 @@ public class DoorScript : MonoBehaviour
     {
         Debug.Log("DoorStartToOpen called");
         DoorRotate();
-        //anim.SetTrigger("doorOpen");
         doorIsOpen = true;
-        if (hingeJoint.angle == -90) 
-        {
-            doorFinishedOpening = true;
-        }
     }
 
     void DoorSlamClose()
     {
         Debug.Log("DoorSlamClose called");
-        sound.currentNoise += noiseMadeByDoorSlam;
-        float angleDifference = originalRotation - hingeJoint.angle;
-
         JointMotor motor = hingeJoint.motor;
-        motor.targetVelocity = Mathf.Sign(angleDifference) * rotSpeed;
+
+        motor.targetVelocity = closeSpeed;
         hingeJoint.motor = motor;
 
-        //anim.SetTrigger("doorClose");
         doorIsOpen = false;
         if (playervel >= 50)
-            {
-            sound.currentNoise += 10;
+        {
+            noiseMadeByDoorSlam += 10;
+            sound.currentNoise += noiseMadeByDoorSlam;
+            noiseMadeByDoorSlam -= 10;
+        }
+        else
+        {
+            sound.currentNoise += noiseMadeByDoorSlam;
         }
     }
 
     void DoorRotate()
     {
+
         Debug.Log("DoorRotate called");
-        float angleDifference = targetRotation - hingeJoint.angle;
 
         JointMotor motor = hingeJoint.motor;
-        motor.targetVelocity = Mathf.Sign(angleDifference) * rotSpeed;
+        motor.targetVelocity = openSpeed;
         hingeJoint.motor = motor;
+
+        //float angleDifference = targetRotation - hingeJoint.angle;
+        //Debug.Log("hingeJoint angle is " + hingeJoint.angle);
+        ////Debug.Log("targetRotation is " + targetRotation);
+
+        //JointMotor motor = hingeJoint.motor;
+
+        //motor.targetVelocity = Mathf.Sign(angleDifference) * rotSpeed;
+        //hingeJoint.motor = motor;
+        //if (hingeJoint.angle == -90)
+        //{
+        //    doorFinishedOpening = true;
+        //}
     }
 }
