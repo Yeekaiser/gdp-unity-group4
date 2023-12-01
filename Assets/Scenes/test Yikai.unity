@@ -1185,13 +1185,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f3c28debf0bda41a02679c2cc772d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 0}
   noiseMadeByDoorSlam: 10
-  doorOpenDelay: 15
+  doorSlamDelay: 15
   timeToFullyOpenDoor: 0
   doorIsOpen: 0
   doorFinishedOpening: 0
   playervel: 0
-  rotSpeed: 0
+  openSpeed: 0
+  closeSpeed: 0
   targetRotation: 90
   originalRotation: 0
   timePassed: 0
@@ -1442,7 +1444,7 @@ HingeJoint:
   m_UseLimits: 1
   m_Limits:
     min: -90
-    max: 90
+    max: 5
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -1560,13 +1562,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f3c28debf0bda41a02679c2cc772d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 427938223}
   noiseMadeByDoorSlam: 70
-  doorOpenDelay: 5
+  doorSlamDelay: 15
   timeToFullyOpenDoor: 5
   doorIsOpen: 0
   doorFinishedOpening: 0
   playervel: 0
-  rotSpeed: 0
+  openSpeed: -5
+  closeSpeed: 200
   targetRotation: 90
   originalRotation: 0
   timePassed: 0
