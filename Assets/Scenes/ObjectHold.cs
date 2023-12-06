@@ -18,12 +18,12 @@ public class ObjectHold : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey("f"))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             StartPickUp();
         }
 
-        if (Input.GetKeyUp("f"))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             Drop();
         }
