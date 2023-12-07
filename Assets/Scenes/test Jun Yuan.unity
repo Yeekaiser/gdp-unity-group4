@@ -804,7 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Object: {fileID: 208475903}
   PlayerTransform: {fileID: 866779370}
-  range: 1
+  range: 3
   Camera: {fileID: 1415564712}
 --- !u!114 &471061750
 MonoBehaviour:
