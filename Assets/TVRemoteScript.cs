@@ -8,6 +8,8 @@ public class TVRemoteScript : MonoBehaviour
     private GameObject TVObj;
     [SerializeField]
     private TVScript TV;
+
+    public float remoteVolDownRate = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class TVRemoteScript : MonoBehaviour
                 Debug.Log("Did Hit" + hit.collider.name);
                 if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
                 {
-                    TV.tvCurrentVol -= 1 * Time.deltaTime;
+                    TV.tvCurrentVol -= remoteVolDownRate * Time.deltaTime;
                 }
             }
         }
