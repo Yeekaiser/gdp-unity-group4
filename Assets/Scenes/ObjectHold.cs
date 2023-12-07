@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectHold : MonoBehaviour
@@ -7,29 +5,30 @@ public class ObjectHold : MonoBehaviour
     public GameObject Object;
     public Transform PlayerTransform;
     public float range = 3f;
-    public float Go = 100f;
     public Camera Camera;
 
+    private bool isHolding = false;
+    private Collider objectCollider;
 
     void Start()
     {
-        
+        objectCollider = Object.GetComponent<Collider>();
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isHolding)
         {
             StartPickUp();
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && isHolding)
         {
             Drop();
         }
     }
 
-    void StartPickUp ()
+    void StartPickUp()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, range))
@@ -44,14 +43,20 @@ public class ObjectHold : MonoBehaviour
         }
     }
 
-    void PickUp ()
+    void PickUp()
     {
-        Object.transform.SetParent(PlayerTransform);
+        Object.transform.SetParent(Camera.transform);
+        objectCollider.enabled = false; // Disable the collider when picked up
+        Object.GetComponent<Rigidbody>().isKinematic = true; // Disable physics interactions for the held object
+        isHolding = true;
     }
 
-    void Drop ()
+    void Drop()
     {
-        PlayerTransform.DetachChildren();
+        Object.transform.SetParent(null); // Set the object's parent back to null
+        objectCollider.enabled = true; // Enable the collider when dropped
+        Object.GetComponent<Rigidbody>().isKinematic = false; // Enable physics interactions
+        isHolding = false;
     }
-    
 }
+
