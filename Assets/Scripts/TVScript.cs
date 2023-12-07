@@ -15,6 +15,9 @@ public class TVScript : MonoBehaviour
     private float tvSpikeVol = 100f;   //koi edit this thx
     public bool tvIsOn = false;
 
+    public float interval = 0.5f;  // Set the interval in seconds
+    private float lastTriggerTime;
+
     [HideInInspector]
     public float timePassed;
     [HideInInspector]
@@ -24,6 +27,8 @@ public class TVScript : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        lastTriggerTime = Time.time;
+
         InvokeRepeating("TVVolUp", 0, tvVolUpDelaySeconds);
     }
 
@@ -54,7 +59,15 @@ public class TVScript : MonoBehaviour
 
     void PlayTVSound()
     {
+
+        if (Time.time - lastTriggerTime >= interval)
+        {
+            sound.currentNoise += tvCurrentVol;
+
+            // Update lastTriggerTime to the current time
+            lastTriggerTime = Time.time;
+        }
         Debug.Log(tvCurrentVol);
-        sound.sound += tvCurrentVol;
+        
     }
 }
