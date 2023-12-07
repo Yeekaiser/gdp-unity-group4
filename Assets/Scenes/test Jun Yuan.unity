@@ -813,14 +813,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471061744}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 029fccd165e00f541ba4c1e5c385df8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 1741208781}
   PlayerTransform: {fileID: 866779370}
-  range: 3
+  range: 2
   Camera: {fileID: 1415564712}
 --- !u!1 &484420415
 GameObject:
