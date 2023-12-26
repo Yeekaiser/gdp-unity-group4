@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorScript : MonoBehaviour
+public class DoorScriptOld : MonoBehaviour
 {
     [SerializeField]
     private SoundMeter sound;
@@ -12,9 +12,8 @@ public class DoorScript : MonoBehaviour
     public float timeToFullyOpenDoor;
 
     public bool doorIsOpen = false;
-    public float doorFistOpenedTime;
-    //public bool doorFinishedOpening;
-
+    public bool doorFinishedOpening;
+    
     public float playervel = 0f;
     public float openSpeed = -5f;
     public float closeSpeed = 180f;
@@ -27,12 +26,15 @@ public class DoorScript : MonoBehaviour
     public float timePassed;
     [HideInInspector]
     public float doorOpenedTime;
-    
+    [HideInInspector]
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        hingeJoint = GetComponent<HingeJoint>();        
+        hingeJoint = GetComponent<HingeJoint>();
+        anim = GetComponent<Animator>();
+        //InvokeRepeating("DoorState", 0f, doorOpenDelay);    //calls DoorState() every doorOpenDelay seconds - door will either slam or open every 10 sec
     }
 
     // Update is called once per frame
@@ -45,9 +47,9 @@ public class DoorScript : MonoBehaviour
     {
         //Debug.Log("doorState called");
         Debug.Log("hingejoint angle = " + hingeJoint.angle);
-        if (hingeJoint.angle >= 2)
+        if (hingeJoint.angle >= 0)
         {
-            Invoke("DoorStartToOpen", 5f);
+            DoorStartToOpen();
         }
         else if(hingeJoint.angle == -90)
         {
@@ -59,9 +61,8 @@ public class DoorScript : MonoBehaviour
     void DoorStartToOpen()
     {
         Debug.Log("DoorStartToOpen called");
-        //DoorRotate();
+        DoorRotate();
         doorIsOpen = true;
-        doorFistOpenedTime = Time.time;
     }
 
     void DoorSlamClose()

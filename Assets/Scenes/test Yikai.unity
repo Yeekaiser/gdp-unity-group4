@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   doorSlamDelay: 15
   timeToFullyOpenDoor: 0
   doorIsOpen: 0
-  doorFinishedOpening: 0
+  doorFistOpenedTime: 0
   playervel: 0
   openSpeed: 0
   closeSpeed: 0
@@ -1198,7 +1198,6 @@ MonoBehaviour:
   originalRotation: 0
   timePassed: 0
   doorOpenedTime: 0
-  anim: {fileID: 0}
 --- !u!82 &1473374062
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1329,6 +1328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVObj: {fileID: 1896811110}
   TV: {fileID: 1896811111}
+  remoteVolDownRate: 5
 --- !u!136 &1582170136
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1530,7 +1530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!59 &1808696045
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -1552,7 +1552,7 @@ HingeJoint:
   m_UseMotor: 1
   m_Motor:
     targetVelocity: 0
-    force: 1
+    force: 100
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
@@ -1680,15 +1680,14 @@ MonoBehaviour:
   doorSlamDelay: 15
   timeToFullyOpenDoor: 5
   doorIsOpen: 0
-  doorFinishedOpening: 0
+  doorFistOpenedTime: 0
   playervel: 0
   openSpeed: -5
-  closeSpeed: 200
+  closeSpeed: 180
   targetRotation: 90
   originalRotation: 0
   timePassed: 0
   doorOpenedTime: 0
-  anim: {fileID: 0}
 --- !u!1 &1810031021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,6 +1877,7 @@ MonoBehaviour:
   tvCurrentVol: 0
   tvVolUpDelaySeconds: 10
   tvIsOn: 0
+  interval: 0.5
   timePassed: 0
   anim: {fileID: 0}
 --- !u!1 &1917999742
