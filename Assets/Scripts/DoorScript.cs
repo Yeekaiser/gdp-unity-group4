@@ -45,7 +45,7 @@ public class DoorScript : MonoBehaviour
     {
         //Debug.Log("doorState called");
         Debug.Log("hingejoint angle = " + hingeJoint.angle);
-        if (hingeJoint.angle >= 2)
+        if (hingeJoint.angle >= 2 && doorIsOpen != true)
         {
             Invoke("DoorStartToOpen", 5f);
         }
@@ -59,7 +59,7 @@ public class DoorScript : MonoBehaviour
     void DoorStartToOpen()
     {
         Debug.Log("DoorStartToOpen called");
-        //DoorRotate();
+        DoorRotate();
         doorIsOpen = true;
         doorFistOpenedTime = Time.time;
     }
