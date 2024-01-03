@@ -17,12 +17,12 @@ public class ObjectHold : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isHolding)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !isHolding)
         {
             StartPickUp();
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && isHolding)
+        if (Input.GetKeyUp(KeyCode.Mouse1) && isHolding)
         {
             Drop();
         }
