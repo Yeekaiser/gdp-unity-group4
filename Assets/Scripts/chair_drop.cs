@@ -8,7 +8,7 @@ public class chair_drop : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > 1)
+        if (collision.relativeVelocity.magnitude > 2)
         {
             impactSound.Play();
                         Debug.Log("Impact sound played!");
