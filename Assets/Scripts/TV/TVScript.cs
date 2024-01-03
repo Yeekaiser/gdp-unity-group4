@@ -67,7 +67,7 @@ public class TVScript : MonoBehaviour
             // Update lastTriggerTime to the current time
             lastTriggerTime = Time.time;
         }
-        Debug.Log(tvCurrentVol);
+        //Debug.Log(tvCurrentVol);
         
     }
 }

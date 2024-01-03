@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FurnitureDragSound : MonoBehaviour
 {
-    public SoundMeter sound;
-    public Rigidbody rb;
+    private SoundMeter sound;
+    private Rigidbody rb;
 
     public bool isGrounded;
     public float noiseMadeByDragging;
@@ -14,6 +14,7 @@ public class FurnitureDragSound : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        sound = GameObject.Find("sound").GetComponent<SoundMeter>();
     }
 
     // Update is called once per frame

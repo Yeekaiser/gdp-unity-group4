@@ -33,7 +33,7 @@ public class ObjectHold : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, range))
         {
-            Debug.Log(hit.transform.name);
+            //Debug.Log(hit.transform.name);
 
             Target target = hit.transform.GetComponent<Target>();
             if (target != null)
