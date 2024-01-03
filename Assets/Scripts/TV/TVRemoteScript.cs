@@ -19,7 +19,7 @@ public class TVRemoteScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
@@ -28,12 +28,12 @@ public class TVRemoteScript : MonoBehaviour
                 Debug.Log("Did Hit" + hit.collider.name);
                 if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
                 {
-                    TV.tvCurrentVol -= remoteVolDownRate * Time.deltaTime;
+                    TV.tvCurrentVol -= remoteVolDownRate;
                 }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
@@ -42,7 +42,7 @@ public class TVRemoteScript : MonoBehaviour
                 Debug.Log("Did Hit" + hit.collider.name);
                 if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
                 {
-                    TV.tvCurrentVol += remoteVolDownRate * Time.deltaTime;
+                    TV.tvCurrentVol += remoteVolDownRate;
                 }
             }
         }
