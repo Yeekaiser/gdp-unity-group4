@@ -42,7 +42,7 @@ public class TVRemoteScript : MonoBehaviour
             {
 
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))     //uses raycast to check if pointing at the TV
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                     //Debug.Log("Did Hit" + hit.collider.name);

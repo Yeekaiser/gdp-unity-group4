@@ -27,5 +27,8 @@ public class SoundMeter : MonoBehaviour
         
     }
 
-
+    public void MakeSound(float noiseMade)
+    {
+        currentNoise += noiseMade;
+    }
 }
