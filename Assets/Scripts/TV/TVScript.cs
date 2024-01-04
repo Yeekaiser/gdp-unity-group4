@@ -12,7 +12,6 @@ public class TVScript : MonoBehaviour
     public float tvCurrentVol;
     public float tvVolUpDelaySeconds = 10f;
 
-    private float tvSpikeVol = 100f;   //koi edit this thx
     public bool tvIsOn = false;
 
     public float interval = 0.5f;  // Set the interval in seconds
@@ -33,7 +32,7 @@ public class TVScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         PlayTVSound();
     }
@@ -46,15 +45,6 @@ public class TVScript : MonoBehaviour
         {
             tvCurrentVol += tvVolUpRate;
         }
-        else
-        {
-            TVVolSpike();
-        }
-    }
-
-    void TVVolSpike()
-    {
-        tvCurrentVol += tvSpikeVol;
     }
 
     void PlayTVSound()

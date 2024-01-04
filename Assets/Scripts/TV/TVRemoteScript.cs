@@ -24,15 +24,14 @@ public class TVRemoteScript : MonoBehaviour
             //decreases the volume per press if the ray hits the tv
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("volume down");
-
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                    Debug.Log("Did Hit" + hit.collider.name);
+                    //Debug.Log("Did Hit" + hit.collider.name);
                     if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
                     {
+                        //Debug.Log("vol reduced");
                         TV.tvCurrentVol -= remoteVolDownRate;
                     }
                 }
@@ -41,15 +40,15 @@ public class TVRemoteScript : MonoBehaviour
             //increases the volume per press if the ray hits the tv
             if (Input.GetKeyDown(KeyCode.F))
             {
-                Debug.Log("volume up");
 
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))     //uses raycast to check if pointing at the TV
                 {
                     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                    Debug.Log("Did Hit" + hit.collider.name);
-                    if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
+                    //Debug.Log("Did Hit" + hit.collider.name);
+                    if (hit.collider.gameObject == TVObj)
                     {
+                        //Debug.Log("volume up");
                         TV.tvCurrentVol += remoteVolDownRate;
                     }
                 }
