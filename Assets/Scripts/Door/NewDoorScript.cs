@@ -6,8 +6,8 @@ public class NewDoorScript : MonoBehaviour
 {
     public HingeJoint hinge;
     public JointMotor motor;
-    private float targetVel = 180f;
-    private float closeForce = 100f;
+    private float targetVel = 3000f;
+    private float closeForce = 600f;
 
     bool doorSlamCalled = false;
 
@@ -25,13 +25,13 @@ public class NewDoorScript : MonoBehaviour
         if (hinge.angle < 0 && doorSlamCalled == false)
         {
             Debug.Log(hinge.angle);
+
+
+
             Invoke("DoorSlamClose", 10f);
             doorSlamCalled = true;
         }
-        else
-        {
-            motor.force = 0f;
-        }
+
     }
 
     private void DoorSlamClose()
@@ -41,14 +41,32 @@ public class NewDoorScript : MonoBehaviour
         motor = hinge.motor;
         motor.targetVelocity = targetVel;
         motor.force = closeForce;
-
         hinge.motor = motor;
+
 
         doorSlamCalled = false;
 
-        sound.MakeSound(noiseMade);
     }
 
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Doorslam")
+            sound.MakeSound(noiseMade);
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("collided");
+        if (other.gameObject.name == "Doorslam")
+            sound.MakeSound(noiseMade);
+
+        if (other.gameObject.name == "Doorslam")
+            sound.MakeSound(noiseMade);
+
+        motor = hinge.motor;
+        motor.targetVelocity = 0f;
+        hinge.motor = motor;
+    }
 
 }
