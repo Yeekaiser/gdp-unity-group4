@@ -7,8 +7,8 @@ public class TVScript : MonoBehaviour
     [SerializeField]
     private SoundMeter sound;
 
-    public float tvMaxVol = 5f;  //koi edit this thx
-    public float tvVolUpRate = 1f;
+    public float tvMaxVol = 100f;
+    public float tvVolUpRate = 5f;
     public float tvCurrentVol;
     public float tvVolUpDelaySeconds = 10f;
 

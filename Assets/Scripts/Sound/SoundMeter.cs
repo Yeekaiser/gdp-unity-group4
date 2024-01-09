@@ -8,7 +8,7 @@ public class SoundMeter : MonoBehaviour
 {
     public float currentNoise = 0;
     private Image rectangle;
-    private const float MAX_SOUND = 500f;
+    private const float MAX_SOUND = 100f;
     public float sound = MAX_SOUND;
     // Start is called before the first frame update
     void Start()
@@ -22,7 +22,7 @@ public class SoundMeter : MonoBehaviour
         rectangle.fillAmount = currentNoise / MAX_SOUND;
         if (currentNoise > 0)
         {
-            currentNoise -= 10f;
+            currentNoise -= 2f;
             if (currentNoise < 0)
                 currentNoise = 0;
         }
