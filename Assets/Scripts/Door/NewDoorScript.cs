@@ -12,7 +12,7 @@ public class NewDoorScript : MonoBehaviour
     bool doorSlamCalled = false;
 
     [SerializeField] private SoundMeter sound;
-    [SerializeField] public float noiseMade = 10f;
+    [SerializeField] public float noiseMade = 300f;
     // Start is called before the first frame update
     void Start()
     {
