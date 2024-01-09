@@ -21,6 +21,9 @@ public class TVRemoteScript : MonoBehaviour
     {
         if (transform.parent == cam.transform)        //if the remote has been picked up by player
         {
+            //koi edit here
+            //if pickedup - show vol up/down
+
             //decreases the volume per press if the ray hits the tv
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -33,6 +36,7 @@ public class TVRemoteScript : MonoBehaviour
                     {
                         //Debug.Log("vol reduced");
                         TV.tvCurrentVol -= remoteVolDownRate;
+                        //change text on screen koi 
                     }
                 }
             }
@@ -50,6 +54,7 @@ public class TVRemoteScript : MonoBehaviour
                     {
                         //Debug.Log("volume up");
                         TV.tvCurrentVol += remoteVolDownRate;
+                        //change text on screen koi
                     }
                 }
             }
