@@ -14,7 +14,7 @@ public class FurnitureDragSound : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //sound = GameObject.Find("sound").GetComponent<SoundMeter>();
+        sound = GameObject.Find("Sound").GetComponent<SoundMeter>();
     }
 
     // Update is called once per frame
