@@ -7,12 +7,11 @@ public class TVScript : MonoBehaviour
     [SerializeField]
     private SoundMeter sound;
 
-    public float tvMaxVol = 5f;  //koi edit this thx
-    public float tvVolUpRate = 1f;
+    public float tvMaxVol = 100f;
+    public float tvVolUpRate = 5f;
     public float tvCurrentVol;
     public float tvVolUpDelaySeconds = 10f;
 
-    private float tvSpikeVol = 100f;   //koi edit this thx
     public bool tvIsOn = false;
 
     public float interval = 0.5f;  // Set the interval in seconds
@@ -33,11 +32,11 @@ public class TVScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         PlayTVSound();
     }
-
+        
 
     void TVVolUp()
     {
@@ -46,15 +45,6 @@ public class TVScript : MonoBehaviour
         {
             tvCurrentVol += tvVolUpRate;
         }
-        else
-        {
-            TVVolSpike();
-        }
-    }
-
-    void TVVolSpike()
-    {
-        tvCurrentVol += tvSpikeVol;
     }
 
     void PlayTVSound()
@@ -67,7 +57,7 @@ public class TVScript : MonoBehaviour
             // Update lastTriggerTime to the current time
             lastTriggerTime = Time.time;
         }
-        Debug.Log(tvCurrentVol);
+        //Debug.Log(tvCurrentVol);
         
     }
 }

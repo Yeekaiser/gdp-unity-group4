@@ -23,9 +23,14 @@ public class SoundMeter : MonoBehaviour
         if (currentNoise > 0)
         {
             currentNoise -= 2f;
+            if (currentNoise < 0)
+                currentNoise = 0;
         }
         
     }
 
-
+    public void MakeSound(float noiseMade)
+    {
+        currentNoise += noiseMade;
+    }
 }

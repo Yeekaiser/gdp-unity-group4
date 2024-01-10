@@ -48,7 +48,9 @@ public class DoorScript : MonoBehaviour
         else if (hingeJoint.angle >= 0)
         {
             DoorSlamCalled = false;
-            Debug.Log(playerRB.velocity.magnitude + "is player vel");
+
+            //Debug.Log(playerRB.velocity.magnitude + "is player vel");
+
             if (playerRB.velocity.magnitude > playervel)
             {
                 DoorSlamClose();

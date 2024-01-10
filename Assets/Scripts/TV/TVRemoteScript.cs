@@ -8,7 +8,7 @@ public class TVRemoteScript : MonoBehaviour
     private GameObject TVObj;
     [SerializeField]
     private TVScript TV;
-
+    [SerializeField] private Camera cam;
     public float remoteVolDownRate = 5f;
     // Start is called before the first frame update
     void Start()
@@ -19,35 +19,46 @@ public class TVRemoteScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (transform.parent == cam.transform)        //if the remote has been picked up by player
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit" + hit.collider.name);
-                if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
-                {
-                    TV.tvCurrentVol -= remoteVolDownRate;
-                }
-            }
-        }
+            //koi edit here
+            //if pickedup - show vol up/down
 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
+            //decreases the volume per press if the ray hits the tv
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
-                Debug.Log("Did Hit" + hit.collider.name);
-                if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
                 {
-                    TV.tvCurrentVol += remoteVolDownRate;
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                    //Debug.Log("Did Hit" + hit.collider.name);
+                    if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
+                    {
+                        //Debug.Log("vol reduced");
+                        TV.tvCurrentVol -= remoteVolDownRate;
+                        //change text on screen koi 
+                    }
+                }
+            }
+
+            //increases the volume per press if the ray hits the tv
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
+                {
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                    //Debug.Log("Did Hit" + hit.collider.name);
+                    if (hit.collider.gameObject == TVObj)
+                    {
+                        //Debug.Log("volume up");
+                        TV.tvCurrentVol += remoteVolDownRate;
+                        //change text on screen koi
+                    }
                 }
             }
         }
-        
-    
     }
 
 
