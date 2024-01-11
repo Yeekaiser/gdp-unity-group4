@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-	[SerializeField] private float sensX;
+    [SerializeField] private float sensX;
     [SerializeField] private float sensY;
 
-	Camera cam;
+    Camera cam;
 
-	float mouseX;
+    float mouseX;
     float mouseY;
 
     float multiplier = 0.01f;
@@ -33,14 +33,17 @@ public class PlayerLook : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 
-     void MyInput()
+    void MyInput()
     {
         mouseX = Input.GetAxisRaw("Mouse X");
         mouseY = Input.GetAxisRaw("Mouse Y");
-         
-        yRotation += mouseX * sensX * multiplier;
-        xRotation -= mouseY * sensY * multiplier;
 
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        if (Input.mousePosition.x > Screen.width / 2)
+        {
+            yRotation += mouseX * sensX * multiplier;
+            xRotation -= mouseY * sensY * multiplier;
+
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        }
     }
 }
