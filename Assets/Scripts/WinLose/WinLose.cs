@@ -24,7 +24,7 @@ public class WinLose : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sound.currentNoise == 500)
+        if (sound.currentNoise >= 500)
         {
             isGameOver = true;
         }
