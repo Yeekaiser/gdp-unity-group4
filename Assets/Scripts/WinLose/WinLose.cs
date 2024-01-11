@@ -10,8 +10,9 @@ public class WinLose : MonoBehaviour
     [SerializeField] private GameObject losepanel;
     [SerializeField] private GameObject wintext;
     [SerializeField] private GameObject losetext;
-    private bool isGameOver = false;
+    
     private SoundMeter sound;
+    private float currentnoise;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,16 +20,13 @@ public class WinLose : MonoBehaviour
         winpanel.SetActive(false);
         wintext.SetActive(false);
         losetext.SetActive(false);
+        sound = GameObject.Find("Sound").GetComponent<SoundMeter>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (sound.currentNoise >= 500)
-        {
-            isGameOver = true;
-        }
-        if (isGameOver == true)
+        if (sound.currentNoise > 480)
         {
             losepanel.SetActive(true);
             losetext.SetActive(true);

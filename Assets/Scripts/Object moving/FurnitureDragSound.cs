@@ -24,7 +24,7 @@ public class FurnitureDragSound : MonoBehaviour
             if (isGrounded)
             {   
                 //Debug.Log(gameObject.name + "On the Ground");
-                noiseMadeByDragging = rb.velocity.magnitude * 10f;
+                noiseMadeByDragging = rb.velocity.magnitude;
                 if (noiseMadeByDragging > 50f)   
                     noiseMadeByDragging = 50f;
 
