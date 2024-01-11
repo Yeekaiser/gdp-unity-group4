@@ -71,7 +71,15 @@ public class FriendScript : MonoBehaviour
     {
         if (current == next - 1)
         {
-            current = next;
+            scenario = next;
         }
+    }
+
+    IEnumerator PauseForFiveSeconds()
+    {
+
+        // Pause for 5 seconds
+        yield return new WaitForSeconds(5f);
+
     }
 }
