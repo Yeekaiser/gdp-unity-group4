@@ -14,7 +14,7 @@ public class NewDoorScript : MonoBehaviour
     [SerializeField] private SoundMeter sound;
     [SerializeField] public float noiseMade = 300f;
 
-    private FriendScript scenario;
+    [SerializeField] private FriendScript scenario;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +28,8 @@ public class NewDoorScript : MonoBehaviour
         {
             Debug.Log(hinge.angle);
 
-            if(scenario.scenario == 1)
-                scenario.scenario = 2;
+            if(scenario.scenario == 2)
+                scenario.scenario = 3;
 
             Invoke("DoorSlamClose", 10f);
             doorSlamCalled = true;

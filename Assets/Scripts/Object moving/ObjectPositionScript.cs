@@ -6,6 +6,7 @@ public class ObjectPositionScript : MonoBehaviour
     public Transform targetPosition;
     private AudioSource audioSource; // Reference to the AudioSource component
 
+    [SerializeField] private FriendScript scenario;
     void Start()
     {
         if (startingPosition == null)
@@ -35,6 +36,9 @@ public class ObjectPositionScript : MonoBehaviour
 
         if (other.CompareTag("TargetArea"))
         {
+            if (scenario.scenario == 3)
+                scenario.scenario = 4;
+
             Debug.Log("Object entered the target area: " + gameObject.name);
 
             // Play the sound when the object reaches the target area

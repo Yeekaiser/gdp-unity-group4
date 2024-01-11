@@ -50,12 +50,11 @@ public class FriendScript : MonoBehaviour
                 MoveToPosition(doorOutsidePos.position);
                 Dialogue1.SetActive(false);
                 Dialogue2.SetActive(true);
-
                 break;
             case 1:
                 MoveToPosition(startPos.position);
                 Dialogue1.SetActive(true);
-
+                nextScenario(scenario, 2);
                 break;
             default:
                 break;
@@ -66,5 +65,13 @@ public class FriendScript : MonoBehaviour
     {
         // Interpolate towards the target position gradually
         transform.position = Vector3.Lerp(transform.position, new Vector3(targetPosition.x, gameObject.transform.position.y, targetPosition.z), moveSpeed * Time.deltaTime);
+    }
+
+    public void nextScenario(int current, int next)
+    {
+        if (current == next - 1)
+        {
+            current = next;
+        }
     }
 }
