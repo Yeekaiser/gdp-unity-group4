@@ -22,6 +22,8 @@ public class FriendScript : MonoBehaviour
 
     private Vector3 targetPosition;
 
+    [SerializeField] private WinLose winLose;
+
     // Update is called once per frame
     void Update()
     {
@@ -31,30 +33,36 @@ public class FriendScript : MonoBehaviour
                 MoveToPosition(leaveDoorPos.position);
                 
                 break;
-            case 5:
+            case 5: //this is after watching TV, friend about to leave
+                    //moves to 6 by opening and closing the door quietly
                 MoveToPosition(beforeLeaveDoorPos.position);
                 Dialogue4.SetActive(false);
                 Dialogue5.SetActive(true);
+
+                winLose.Win();
                 break;
-            case 4:
+            case 4: //this is after the chair is in position, starting to watch TV
+                    //moves to 5 by TVScript after keeping tv volume down for 10 seconds
                 MoveToPosition(chairPos.position);
                 Dialogue3.SetActive(false);
                 Dialogue4.SetActive(true);
                 break;
-            case 3:
+            case 3: //this is after friend steps foot inside house
+                    //moves to 4 by ObjectPositionScript after moving chair to correct position
                 MoveToPosition(doorInsidePos.position);
                 Dialogue2.SetActive(false);
                 Dialogue3.SetActive(true);
                 break;
-            case 2:
+            case 2: //this is beginning of quests
+                    //moves to 3 by NewDoorScript when door is open
                 MoveToPosition(doorOutsidePos.position);
                 Dialogue1.SetActive(false);
                 Dialogue2.SetActive(true);
                 break;
-            case 1:
+            case 1: //this is starting, friend says hi
                 MoveToPosition(startPos.position);
                 Dialogue1.SetActive(true);
-                nextScenario(scenario, 2);
+                StartCoroutine(PauseForSeconds(3));
                 break;
             default:
                 break;
@@ -75,11 +83,10 @@ public class FriendScript : MonoBehaviour
         }
     }
 
-    IEnumerator PauseForFiveSeconds()
+    IEnumerator PauseForSeconds(int seconds)
     {
-
-        // Pause for 5 seconds
-        yield return new WaitForSeconds(5f);
-
+        // Pause for x seconds
+        yield return new WaitForSeconds(seconds);
+        nextScenario(scenario, 2);
     }
 }

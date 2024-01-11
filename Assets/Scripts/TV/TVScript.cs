@@ -22,6 +22,8 @@ public class TVScript : MonoBehaviour
     [HideInInspector]
     public Animator anim;
 
+    [SerializeField] private FriendScript scenario;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,10 @@ public class TVScript : MonoBehaviour
     void FixedUpdate()
     {
         PlayTVSound();
+        if(scenario.scenario == 4)
+        {
+            StartCoroutine(PauseForSeconds(10));
+        }
     }
         
 
@@ -59,5 +65,15 @@ public class TVScript : MonoBehaviour
         }
         //Debug.Log(tvCurrentVol);
         
+    }
+
+    IEnumerator PauseForSeconds(int seconds)
+    {
+
+        // Pause for 5 seconds
+        yield return new WaitForSeconds(seconds);
+
+        scenario.nextScenario(scenario.scenario, 5);
+
     }
 }

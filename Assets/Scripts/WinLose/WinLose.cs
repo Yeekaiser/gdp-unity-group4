@@ -10,7 +10,8 @@ public class WinLose : MonoBehaviour
     [SerializeField] private GameObject losepanel;
     [SerializeField] private GameObject wintext;
     [SerializeField] private GameObject losetext;
-    
+
+    public GameObject Player;
     private SoundMeter sound;
     private float currentnoise;
     // Start is called before the first frame update
@@ -28,8 +29,27 @@ public class WinLose : MonoBehaviour
     {
         if (sound.currentNoise > 480)
         {
-            losepanel.SetActive(true);
-            losetext.SetActive(true);
+            Lose();
         }
+    }
+
+    public void Win()
+    {
+        winpanel.SetActive(true);
+        wintext.SetActive(true);
+
+        Player.GetComponent<PlayerLook>().enabled = false;
+        Player.GetComponent<PlayerMovement>().enabled = false;
+        Player.GetComponent<JoystickMove>().enabled = false;
+    }
+
+    public void Lose()
+    {
+        losepanel.SetActive(true);
+        losetext.SetActive(true);
+
+        Player.GetComponent<PlayerLook>().enabled = false;
+        Player.GetComponent<PlayerMovement>().enabled = false;
+        Player.GetComponent<JoystickMove>().enabled = false;
     }
 }

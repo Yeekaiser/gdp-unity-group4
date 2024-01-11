@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class TVRemoteScript : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject TVObj;
-    [SerializeField]
-    private TVScript TV;
+    
+    [SerializeField] private GameObject TVObj;
+    [SerializeField] private GameObject TVScreen;
+
+    [SerializeField] private TVScript TV;
     [SerializeField] private Camera cam;
     public float remoteVolDownRate = 5f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class TVRemoteScript : MonoBehaviour
     {
         if (transform.parent == cam.transform)        //if the remote has been picked up by player
         {
-            //koi edit here
+            TVScreen.SetActive(true);
             //if pickedup - show vol up/down
 
             //decreases the volume per press if the ray hits the tv

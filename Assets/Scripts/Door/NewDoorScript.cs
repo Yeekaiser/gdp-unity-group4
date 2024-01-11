@@ -28,8 +28,7 @@ public class NewDoorScript : MonoBehaviour
         {
             Debug.Log(hinge.angle);
 
-            if(scenario.scenario == 2)
-                scenario.scenario = 3;
+            StartCoroutine(PauseForSeconds(3));
 
             Invoke("DoorSlamClose", 10f);
             doorSlamCalled = true;
@@ -72,4 +71,10 @@ public class NewDoorScript : MonoBehaviour
         hinge.motor = motor;
     }
 
+    IEnumerator PauseForSeconds(int seconds)
+    {
+        // Pause for 5 seconds
+        yield return new WaitForSeconds(seconds);
+        scenario.nextScenario(scenario.scenario, 3);
+    }
 }

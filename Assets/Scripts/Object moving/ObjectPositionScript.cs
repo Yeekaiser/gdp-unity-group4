@@ -7,6 +7,8 @@ public class ObjectPositionScript : MonoBehaviour
     private AudioSource audioSource; // Reference to the AudioSource component
 
     [SerializeField] private FriendScript scenario;
+
+    bool inTarget = false;
     void Start()
     {
         if (startingPosition == null)
@@ -36,18 +38,26 @@ public class ObjectPositionScript : MonoBehaviour
 
         if (other.CompareTag("TargetArea"))
         {
-            if (scenario.scenario == 3)
-                scenario.scenario = 4;
-
-            Debug.Log("Object entered the target area: " + gameObject.name);
-
-            // Play the sound when the object reaches the target area
-            if (audioSource != null && audioSource.clip != null)
+            if (inTarget == false)
             {
-                audioSource.Play();
-            }
+                if (scenario.scenario == 3)
+                    scenario.scenario = 4;
 
-            // Additional logic when the object reaches the target
+                Debug.Log("Object entered the target area: " + gameObject.name);
+
+                // Play the sound when the object reaches the target area
+                if (audioSource != null && audioSource.clip != null)
+                {
+                    audioSource.Play();
+                }
+
+                inTarget = true;
+                // Additional logic when the object reaches the target
+            }
+            else
+            {
+                inTarget = false;
+            }
         }
     }
 }
