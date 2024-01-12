@@ -39,10 +39,10 @@ public class TVScript : MonoBehaviour
         PlayTVSound();
         if(tvIsOn == true)
         {
-            TVVolUp();
         }
         if(scenario.scenario == 4)
         {
+            TVVolUp();
             StartCoroutine(PauseForSeconds(20));
         }
     }

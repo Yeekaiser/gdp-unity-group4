@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
+    public RectTransform panelRect;
+    public Canvas canvas;
+
     [SerializeField] private float sensX;
     [SerializeField] private float sensY;
 
@@ -27,10 +30,13 @@ public class PlayerLook : MonoBehaviour
 
     private void Update()
     {
-        MyInput();
+        if (RectTransformUtility.RectangleContainsScreenPoint(panelRect, canvas.gameObject.transform.position))
+        {
+            MyInput();
 
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
+            cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            transform.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
     }
 
     void MyInput()
