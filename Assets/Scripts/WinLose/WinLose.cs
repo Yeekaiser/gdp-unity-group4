@@ -52,4 +52,9 @@ public class WinLose : MonoBehaviour
         Player.GetComponent<PlayerMovement>().enabled = false;
         Player.GetComponent<JoystickMove>().enabled = false;
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0)
+;    }
 }
