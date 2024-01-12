@@ -28,8 +28,9 @@ public class ObjectHold : MonoBehaviour
         }
     }
 
-    void StartPickUp()
+    public void StartPickUp()
     {
+        Debug.Log("Called");
         RaycastHit hit;
         if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, range))
         {

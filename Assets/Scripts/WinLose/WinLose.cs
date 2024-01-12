@@ -27,7 +27,7 @@ public class WinLose : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sound.currentNoise > 480)
+        if (sound.currentNoise > 480 && Time.time > 3)
         {
             Lose();
         }

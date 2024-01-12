@@ -37,25 +37,25 @@ public class TVScript : MonoBehaviour
     void FixedUpdate()
     {
         PlayTVSound();
+        if(tvIsOn == true)
+        {
+            TVVolUp();
+        }
         if(scenario.scenario == 4)
         {
-            StartCoroutine(PauseForSeconds(10));
+            StartCoroutine(PauseForSeconds(20));
         }
     }
         
 
     void TVVolUp()
     {
-        Debug.Log("TVVolUp called");
-        if(tvCurrentVol < tvMaxVol)
-        {
             tvCurrentVol += tvVolUpRate;
-        }
     }
 
     void PlayTVSound()
     {
-
+        
         if (Time.time - lastTriggerTime >= interval)
         {
             sound.currentNoise += tvCurrentVol;

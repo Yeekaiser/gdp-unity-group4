@@ -38,6 +38,6 @@ public class FurnitureDragSound : MonoBehaviour
     {
         if (collision.gameObject.name == "floor")
             isGrounded = true;
-        Debug.Log(gameObject.name + "On the Ground");
+        //Debug.Log(gameObject.name + "On the Ground");
     }
 }

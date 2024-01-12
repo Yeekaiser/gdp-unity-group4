@@ -38,7 +38,7 @@ public class FriendScript : MonoBehaviour
                 MoveToPosition(beforeLeaveDoorPos.position);
                 Dialogue4.SetActive(false);
                 Dialogue5.SetActive(true);
-
+                StartCoroutine(PauseForSeconds(4));
                 winLose.Win();
                 break;
             case 4: //this is after the chair is in position, starting to watch TV

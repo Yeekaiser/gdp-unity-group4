@@ -9,12 +9,15 @@ public class NewDoorScript : MonoBehaviour
     private float targetVel = 3000f;
     private float closeForce = 600f;
 
-    bool doorSlamCalled = false;
+    bool doorSlamCalled;
+    bool doorSlamNoise = false;
 
     [SerializeField] private SoundMeter sound;
     [SerializeField] public float noiseMade = 300f;
 
     [SerializeField] private FriendScript scenario;
+
+    private WinLose winLose;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,10 +33,21 @@ public class NewDoorScript : MonoBehaviour
 
             StartCoroutine(PauseForSeconds(3));
 
-            Invoke("DoorSlamClose", 10f);
+            Invoke("DoorSlamClose", 15f);
             doorSlamCalled = true;
         }
 
+        if(scenario.scenario > 3)
+        {
+            //JointLimits limits = GetComponent<HingeJoint>().limits;
+
+            //// Modify the limits
+            //limits.min = -5;
+            //limits.max = 90;
+
+            //// Apply the modified limits back to the HingeJoint
+            //GetComponent<HingeJoint>().limits = limits;
+        }
     }
 
     private void DoorSlamClose()
@@ -47,24 +61,27 @@ public class NewDoorScript : MonoBehaviour
 
 
         doorSlamCalled = false;
+        doorSlamNoise = true;
+
+        winLose.Lose();
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.name == "Doorslam")
-            sound.MakeSound(noiseMade);
-        
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.name == "Doorslam" && doorSlamNoise == true)
+    //        sound.MakeSound(noiseMade);
+
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collided");
-        if (other.gameObject.name == "Doorslam")
+        Debug.Log("triggered");
+        if (other.gameObject.name == "Doorslam" && doorSlamNoise == true)
             sound.MakeSound(noiseMade);
 
-        if (other.gameObject.name == "Doorslam")
-            sound.MakeSound(noiseMade);
+        //if (other.gameObject.name == "Doorslam")
+        //    sound.MakeSound(noiseMade);
 
         motor = hinge.motor;
         motor.targetVelocity = 0f;
