@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3611,7 +3611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hinge: {fileID: 1808696045}
   sound: {fileID: 427938223}
-  noiseMade: 500
+  noiseMade: 200
   scenario: {fileID: 679767874}
 --- !u!1 &1810031021
 GameObject:
@@ -3965,7 +3965,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1934497646}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
