@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TVRemoteScript : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class TVRemoteScript : MonoBehaviour
     [SerializeField] private Camera cam;
     public float remoteVolDownRate = 5f;
 
+    public GameObject volUp;
+    public GameObject volDown;
 
     // Start is called before the first frame update
     void Start()
@@ -22,47 +25,97 @@ public class TVRemoteScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.parent == cam.transform)
+        {
+            volUp.SetActive(true);
+            volDown.SetActive(true);
+        }
+
+
+
+        //if (transform.parent == cam.transform)        //if the remote has been picked up by player
+        //{
+        //    TVScreen.SetActive(true);
+        //    //if pickedup - show vol up/down
+
+        //    //decreases the volume per press if the ray hits the tv
+        //    if (Input.GetKeyDown(KeyCode.E))
+        //    {
+        //        RaycastHit hit;
+        //        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
+        //        {
+        //            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+        //            //Debug.Log("Did Hit" + hit.collider.name);
+        //            if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
+        //            {
+        //                //Debug.Log("vol reduced");
+        //                TV.tvCurrentVol -= remoteVolDownRate;
+        //                //change text on screen koi 
+        //            }
+        //        }
+        //    }
+
+        //    //increases the volume per press if the ray hits the tv
+        //    if (Input.GetKeyDown(KeyCode.F))
+        //    {
+
+        //        RaycastHit hit;
+        //        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
+        //        {
+        //            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+        //            //Debug.Log("Did Hit" + hit.collider.name);
+        //            if (hit.collider.gameObject == TVObj)
+        //            {
+        //                //Debug.Log("volume up");
+        //                TV.tvCurrentVol += remoteVolDownRate;
+        //                //change text on screen koi
+        //            }
+        //        }
+        //    }
+        //}
+    }
+
+    public void VolDown()
+    {
         if (transform.parent == cam.transform)        //if the remote has been picked up by player
         {
             TVScreen.SetActive(true);
             //if pickedup - show vol up/down
 
             //decreases the volume per press if the ray hits the tv
-            if (Input.GetKeyDown(KeyCode.E))
+            
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                //Debug.Log("Did Hit" + hit.collider.name);
+                if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                    //Debug.Log("Did Hit" + hit.collider.name);
-                    if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
-                    {
-                        //Debug.Log("vol reduced");
-                        TV.tvCurrentVol -= remoteVolDownRate;
-                        //change text on screen koi 
-                    }
+                    //Debug.Log("vol reduced");
+                    TV.tvCurrentVol -= remoteVolDownRate;
+                    //change text on screen koi 
                 }
             }
+            
+        }
+    }
 
-            //increases the volume per press if the ray hits the tv
-            if (Input.GetKeyDown(KeyCode.F))
+    public void VolUp()
+    {
+        if (transform.parent == cam.transform)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
             {
-
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                //Debug.Log("Did Hit" + hit.collider.name);
+                if (hit.collider.gameObject == TVObj)
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                    //Debug.Log("Did Hit" + hit.collider.name);
-                    if (hit.collider.gameObject == TVObj)
-                    {
-                        //Debug.Log("volume up");
-                        TV.tvCurrentVol += remoteVolDownRate;
-                        //change text on screen koi
-                    }
+                    //Debug.Log("volume up");
+                    TV.tvCurrentVol += remoteVolDownRate;
+                    //change text on screen koi
                 }
             }
         }
     }
-
-
 }
