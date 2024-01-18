@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Authentication.ExtendedProtection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,10 @@ public class WinLose : MonoBehaviour
     public GameObject Player;
     private SoundMeter sound;
     private float currentnoise;
+
+    private FriendScript scenario;
+    [SerializeField] private GameObject[] loseMessage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,10 +52,12 @@ public class WinLose : MonoBehaviour
     {
         losepanel.SetActive(true);
         losetext.SetActive(true);
+        loseMessage[scenario.scenario].SetActive(true);
 
         Player.GetComponent<PlayerLook>().enabled = false;
         Player.GetComponent<PlayerMovement>().enabled = false;
         Player.GetComponent<JoystickMove>().enabled = false;
+
     }
 
     public void Restart()
