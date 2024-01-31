@@ -76,46 +76,31 @@ public class TVRemoteScript : MonoBehaviour
     }
 
     public void VolDown()
+{
+    if (transform.parent == cam.transform) // If the remote has been picked up by the player
     {
-        if (transform.parent == cam.transform)        //if the remote has been picked up by player
+        if (TV.tvCurrentVol >= remoteVolDownRate)
         {
-            TVScreen.SetActive(true);
-            //if pickedup - show vol up/down
-
-            //decreases the volume per press if the ray hits the tv
-            
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                //Debug.Log("Did Hit" + hit.collider.name);
-                if (hit.collider.gameObject == TVObj && TV.tvCurrentVol >= 0)
-                {
-                    //Debug.Log("vol reduced");
-                    TV.tvCurrentVol -= remoteVolDownRate;
-                    //change text on screen koi 
-                }
-            }
-            
+            TV.tvCurrentVol -= remoteVolDownRate;
         }
+        else
+        {
+            TV.tvCurrentVol = 0; // Prevents the volume from going below 0
+        }
+        TVScreen.SetActive(true); // Assuming you want to show the TV screen whenever volume is adjusted
+        // Additional code to update volume display on TVScreen if needed
     }
+}
 
-    public void VolUp()
+public void VolUp()
+{
+    if (transform.parent == cam.transform) // If the remote has been picked up by the player
     {
-        if (transform.parent == cam.transform)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))    //uses raycast to check if pointing at the TV
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                //Debug.Log("Did Hit" + hit.collider.name);
-                if (hit.collider.gameObject == TVObj)
-                {
-                    //Debug.Log("volume up");
-                    TV.tvCurrentVol += remoteVolDownRate;
-                    //change text on screen koi
-                }
-            }
-        }
+        TV.tvCurrentVol += remoteVolDownRate;
+        TVScreen.SetActive(true); // Assuming you want to show the TV screen whenever volume is adjusted
+        // Additional code to update volume display on TVScreen if needed
+        // Make sure to implement a maximum volume limit if necessary
     }
+}
+
 }
