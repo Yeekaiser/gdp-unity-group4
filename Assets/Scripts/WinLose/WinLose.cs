@@ -45,7 +45,7 @@ public class WinLose : MonoBehaviour
 
         Player.GetComponent<PlayerLook>().enabled = false;
         Player.GetComponent<PlayerMovement>().enabled = false;
-        Player.GetComponent<JoystickMove>().enabled = false;
+        Player.GetComponent<JoystickMovement>().enabled = false;
     }
 
     public void Lose()
@@ -56,7 +56,7 @@ public class WinLose : MonoBehaviour
 
         Player.GetComponent<PlayerLook>().enabled = false;
         Player.GetComponent<PlayerMovement>().enabled = false;
-        Player.GetComponent<JoystickMove>().enabled = false;
+        Player.GetComponent<JoystickMovement>().enabled = false;
 
     }
 
