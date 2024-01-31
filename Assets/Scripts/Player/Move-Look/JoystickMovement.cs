@@ -4,7 +4,7 @@ public class JoystickMovement : MonoBehaviour
 {
     public Joystick joystick; // Reference to the joystick from the Joystick Pack
     public float moveSpeed = 5f; // Adjust the speed of movement as needed
-
+    public float rotSpeed = 5f;
     private Rigidbody rb;
 
     void Start()
