@@ -17,6 +17,7 @@ public class FriendScript : MonoBehaviour
     [SerializeField] private GameObject Dialogue3;
     [SerializeField] private GameObject Dialogue4;
     [SerializeField] private GameObject Dialogue5;
+    [SerializeField] private GameObject Dialogue6;
     
     [SerializeField] private float moveSpeed = 5f; // Adjust the speed as needed
 
@@ -29,11 +30,11 @@ public class FriendScript : MonoBehaviour
     {
         switch (scenario)
         {
-            case 6:
+            case 7:
                 MoveToPosition(leaveDoorPos.position);
                 
                 break;
-            case 5: //this is after watching TV, friend about to leave
+            case 6: //this is after watching TV, friend about to leave
                     //moves to 6 by opening and closing the door quietly
                 MoveToPosition(beforeLeaveDoorPos.position);
                 Dialogue4.SetActive(false);
@@ -41,14 +42,20 @@ public class FriendScript : MonoBehaviour
                 StartCoroutine(PauseForSeconds(4));
                 winLose.Win();
                 break;
-            case 4: //this is after the chair is in position, starting to watch TV
+            case 5: //this is after the chair is in position, starting to watch TV
                     //moves to 5 by TVScript after keeping tv volume down for 10 seconds
                 MoveToPosition(chairPos.position);
+                Dialogue4.SetActive(false);
+                Dialogue5.SetActive(true);
+                break;
+            case 4: //this is after door is closed
+                    //moves to 4 by ObjectPositionScript after moving chair to correct position
+                MoveToPosition(doorInsidePos.position);
                 Dialogue3.SetActive(false);
                 Dialogue4.SetActive(true);
                 break;
             case 3: //this is after friend steps foot inside house
-                    //moves to 4 by ObjectPositionScript after moving chair to correct position
+                    //changes dialogue to dialogue 4 after door is closed
                 MoveToPosition(doorInsidePos.position);
                 Dialogue2.SetActive(false);
                 Dialogue3.SetActive(true);

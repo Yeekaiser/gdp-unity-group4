@@ -37,7 +37,7 @@ public class ObjectHold : MonoBehaviour
         //}
     }
 
-    public void StartPickUp()
+    public void TogglePickUp()
     {
         Debug.Log("Called");
         RaycastHit hit;

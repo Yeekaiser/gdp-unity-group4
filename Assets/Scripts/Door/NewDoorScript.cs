@@ -16,8 +16,8 @@ public class NewDoorScript : MonoBehaviour
     [SerializeField] public float noiseMade = 300f;
 
     [SerializeField] private FriendScript scenario;
+    [SerializeField]private WinLose winLose;
 
-    private WinLose winLose;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,59 +27,54 @@ public class NewDoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hinge.angle < 0 && doorSlamCalled == false)
-        {
-            Debug.Log(hinge.angle);
+        //if (hinge.angle < 0 && doorSlamCalled == false)
+        //{
+        //    Debug.Log(hinge.angle);
 
-            StartCoroutine(PauseForSeconds(3));
+        //    StartCoroutine(PauseForSeconds(3));
 
-            Invoke("DoorSlamClose", 15f);
-            doorSlamCalled = true;
-        }
+        //    Invoke("DoorSlamClose", 15f);
+        //    doorSlamCalled = true;
+        //}
 
-        if(scenario.scenario > 3)
-        {
-            //JointLimits limits = GetComponent<HingeJoint>().limits;
+        //if (scenario.scenario > 3)
+        //{
+        //    JointLimits limits = GetComponent<HingeJoint>().limits;
 
-            //// Modify the limits
-            //limits.min = -5;
-            //limits.max = 90;
+        //    // Modify the limits
+        //    limits.min = -5;
+        //    limits.max = 90;
 
-            //// Apply the modified limits back to the HingeJoint
-            //GetComponent<HingeJoint>().limits = limits;
-        }
+        //    // Apply the modified limits back to the HingeJoint
+        //    GetComponent<HingeJoint>().limits = limits;
+        //}
     }
 
     private void DoorSlamClose()
     {
-        Debug.Log("Doorslamclose called");
+        if(scenario.scenario == 3)
+        {
+            Debug.Log("Doorslamclose called");
 
-        motor = hinge.motor;
-        motor.targetVelocity = targetVel;
-        motor.force = closeForce;
-        hinge.motor = motor;
+            motor = hinge.motor;
+            motor.targetVelocity = targetVel;
+            motor.force = closeForce;
+            hinge.motor = motor;
 
 
-        doorSlamCalled = false;
-        doorSlamNoise = true;
+            doorSlamCalled = false;
+            doorSlamNoise = true;
 
-        winLose.Lose();
-
+            winLose.Lose("Wind slammed the door loudly!");
+        }
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.name == "Doorslam" && doorSlamNoise == true)
-    //        sound.MakeSound(noiseMade);
-
-    //}
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("triggered");
-        if (other.gameObject.name == "Doorslam" && doorSlamNoise == true)
-            sound.MakeSound(noiseMade);
-
+        if (other.gameObject.name == "Doorslam")
+            scenario.nextScenario(scenario.scenario, 4);
+       
         //if (other.gameObject.name == "Doorslam")
         //    sound.MakeSound(noiseMade);
 
@@ -87,11 +82,22 @@ public class NewDoorScript : MonoBehaviour
         motor.targetVelocity = 0f;
         hinge.motor = motor;
     }
-
-    IEnumerator PauseForSeconds(int seconds)
+    private void OnCollisionEnter(Collision collision)
     {
-        // Pause for 5 seconds
-        yield return new WaitForSeconds(seconds);
-        scenario.nextScenario(scenario.scenario, 3);
+        if (collision.gameObject.name == "Player")
+        {
+            StartCoroutine(PauseForSecondsSlam(20));
+            scenario.nextScenario(scenario.scenario, 3);
+        }
     }
+    IEnumerator PauseForSecondsSlam(int seconds)
+    {
+        // Pause for x seconds
+        yield return new WaitForSeconds(seconds);
+        //scenario.nextScenario(scenario.scenario, 3);
+
+        DoorSlamClose();
+    }
+
+
 }
