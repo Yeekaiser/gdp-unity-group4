@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLook : MonoBehaviour
 {
     //public RectTransform panelRect;
-    public Canvas canvas;
+    //public Canvas canvas;
 
     [SerializeField] private float sensX;
     [SerializeField] private float sensY;
@@ -44,12 +44,12 @@ public class PlayerLook : MonoBehaviour
         mouseX = Input.GetAxisRaw("Mouse X");
         mouseY = Input.GetAxisRaw("Mouse Y");
 
-        if (Input.mousePosition.x > Screen.width / 2)
-        {
+        //if (Input.mousePosition.x > Screen.width / 2)
+        //{
             yRotation += mouseX * sensX * multiplier;
             xRotation -= mouseY * sensY * multiplier;
 
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        }
+        //}
     }
 }

@@ -9,19 +9,19 @@ public class ObjectHold : MonoBehaviour
     public float range = 3f;
     public Camera Camera;
 
-    private bool isHolding = false;
+    public bool isHolding = false;
 
-    private Collider[] colliders;
-    private Collider objectCollider;
+    //public Collider[] colliders;
+    //public Collider objectCollider;
 
     void Start()
     {
-        colliders = new Collider[ObjectArray.Length];
+        //colliders = new Collider[ObjectArray.Length];
 
-        for (int i = 0; i < ObjectArray.Length; i++)
-        {
-            colliders[i] = ObjectArray[i].GetComponent<Collider>();
-        }
+        //for (int i = 0; i < ObjectArray.Length; i++)
+        //{
+        //    colliders[i] = ObjectArray[i].GetComponent<Collider>();
+        //}
     }
 
     void Update()
@@ -35,40 +35,51 @@ public class ObjectHold : MonoBehaviour
         //{
         //    Drop();
         //}
+        if(Input.GetKeyUp(KeyCode.E))
+        {
+            TogglePickUp();
+        }
     }
 
     public void TogglePickUp()
     {
         Debug.Log("Called");
         RaycastHit hit;
-        if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, range))
+        if(Camera.transform.childCount == 0)
         {
-            //Debug.Log(hit.transform.name);
-
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
+            if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, range))
             {
-                PickUp(target);
-                return;
+                //Debug.Log(hit.transform.name);
+
+                Target target = hit.transform.GetComponent<Target>();
+                if (target != null)
+                {
+                    PickUp(target);
+                    return;
+                }
             }
-            Drop(target);
         }
+        Drop();
     }
 
     void PickUp(Target target)
     {
+        Debug.Log("pickup called");
+
         GameObject Object = target.gameObject;
         Object.transform.SetParent(Camera.transform);
-        objectCollider.enabled = false; // Disable the collider when picked up
+        target.GetComponent<Collider>().enabled = false; // Disable the collider when picked up
         Object.GetComponent<Rigidbody>().isKinematic = true; // Disable physics interactions for the held object
         isHolding = true;
     }
 
-    void Drop(Target target)
+    void Drop()
     {
-        GameObject Object = target.gameObject;
+        Debug.Log("drop called");
+
+        GameObject Object = Camera.transform.GetChild(0).gameObject;
         Object.transform.SetParent(null); // Set the object's parent back to null
-        objectCollider.enabled = true; // Enable the collider when dropped
+        Object.GetComponent<Collider>().enabled = true; // Enable the collider when dropped
         Object.GetComponent<Rigidbody>().isKinematic = false; // Enable physics interactions
         isHolding = false;
     }

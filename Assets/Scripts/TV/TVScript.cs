@@ -43,7 +43,7 @@ public class TVScript : MonoBehaviour
         if(scenario.scenario == 4)
         {
             TVVolUp();
-            StartCoroutine(PauseForSeconds(20));
+            //StartCoroutine(PauseForSeconds(20));
         }
     }
         
@@ -73,7 +73,7 @@ public class TVScript : MonoBehaviour
         // Pause for 5 seconds
         yield return new WaitForSeconds(seconds);
 
-        scenario.nextScenario(scenario.scenario, 5);
+        scenario.nextScenario(scenario.scenario, 6);
 
     }
 }

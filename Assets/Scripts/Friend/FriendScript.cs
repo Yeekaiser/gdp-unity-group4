@@ -55,7 +55,7 @@ public class FriendScript : MonoBehaviour
                 Dialogue4.SetActive(true);
                 break;
             case 3: //this is after friend steps foot inside house
-                    //changes dialogue to dialogue 4 after door is closed
+                    //changes dialogue to 4 after door is closed
                 MoveToPosition(doorInsidePos.position);
                 Dialogue2.SetActive(false);
                 Dialogue3.SetActive(true);
