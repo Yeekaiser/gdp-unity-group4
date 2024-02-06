@@ -20,6 +20,13 @@ public class Respawnitems : MonoBehaviour
     {
         Vector3 resetPosition = collision.transform.position;
         resetPosition.y = 0f;
-        transform.position = resetPosition;
+        collision.transform.position = resetPosition;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Vector3 resetPosition = other.transform.position;
+        resetPosition.y = 10f;
+        other.transform.position = resetPosition;
     }
 }

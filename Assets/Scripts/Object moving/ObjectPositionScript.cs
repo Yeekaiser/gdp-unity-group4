@@ -40,8 +40,8 @@ public class ObjectPositionScript : MonoBehaviour
         {
             if (inTarget == false)
             {
-                if (scenario.scenario == 3)
-                    scenario.scenario = 4;
+                if (scenario.scenario == 4)
+                    scenario.scenario = 5;
 
                 Debug.Log("Object entered the target area: " + gameObject.name);
 

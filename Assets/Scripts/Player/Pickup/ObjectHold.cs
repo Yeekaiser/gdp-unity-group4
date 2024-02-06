@@ -8,6 +8,7 @@ public class ObjectHold : MonoBehaviour
     public Transform PlayerTransform;
     public float range = 3f;
     public Camera Camera;
+    [SerializeField] GameObject holding;
 
     public bool isHolding = false;
 
@@ -45,7 +46,7 @@ public class ObjectHold : MonoBehaviour
     {
         Debug.Log("Called");
         RaycastHit hit;
-        if(Camera.transform.childCount == 0)
+        if(holding.transform.childCount == 0)
         {
             if (Physics.Raycast(Camera.transform.position, Camera.transform.forward, out hit, range))
             {
@@ -67,7 +68,7 @@ public class ObjectHold : MonoBehaviour
         Debug.Log("pickup called");
 
         GameObject Object = target.gameObject;
-        Object.transform.SetParent(Camera.transform);
+        Object.transform.SetParent(holding.transform);
         target.GetComponent<Collider>().enabled = false; // Disable the collider when picked up
         Object.GetComponent<Rigidbody>().isKinematic = true; // Disable physics interactions for the held object
         isHolding = true;
@@ -77,7 +78,7 @@ public class ObjectHold : MonoBehaviour
     {
         Debug.Log("drop called");
 
-        GameObject Object = Camera.transform.GetChild(0).gameObject;
+        GameObject Object = holding.transform.GetChild(0).gameObject;
         Object.transform.SetParent(null); // Set the object's parent back to null
         Object.GetComponent<Collider>().enabled = true; // Enable the collider when dropped
         Object.GetComponent<Rigidbody>().isKinematic = false; // Enable physics interactions

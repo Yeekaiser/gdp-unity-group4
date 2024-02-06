@@ -10,12 +10,14 @@ public class TVRemoteScript : MonoBehaviour
     [SerializeField] private GameObject TVScreen;
 
     [SerializeField] private TVScript TV;
-    [SerializeField] private Camera cam;
+    //[SerializeField] private Camera cam;
+    [SerializeField] private Transform holding;
+    
     public float remoteVolDownRate = 5f;
 
     public GameObject volUp;
     public GameObject volDown;
-
+    public GameObject pointer;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +27,20 @@ public class TVRemoteScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.parent == cam.transform)
+        if (transform.parent == holding)
         {
             volUp.SetActive(true);
             volDown.SetActive(true);
+            TVScreen.SetActive(true);
+            pointer.SetActive(true);
+            transform.rotation = Quaternion.identity;
+        }
+        if (transform.parent == null)
+        {
+            volUp.SetActive(false);
+            volDown.SetActive(false);
+            TVScreen.SetActive(false);
+            pointer.SetActive(false);
         }
 
 
@@ -77,9 +89,9 @@ public class TVRemoteScript : MonoBehaviour
 
     public void VolDown()
 {
-    if (transform.parent == cam.transform) // If the remote has been picked up by the player
+    if (transform.parent == holding.transform) // If the remote has been picked up by the player
     {
-        if (TV.tvCurrentVol >= remoteVolDownRate)
+        if (TV.tvCurrentVol > 0)
         {
             TV.tvCurrentVol -= remoteVolDownRate;
         }
@@ -94,7 +106,7 @@ public class TVRemoteScript : MonoBehaviour
 
 public void VolUp()
 {
-    if (transform.parent == cam.transform) // If the remote has been picked up by the player
+    if (transform.parent == holding.transform) // If the remote has been picked up by the player
     {
         TV.tvCurrentVol += remoteVolDownRate;
         TVScreen.SetActive(true); // Assuming you want to show the TV screen whenever volume is adjusted
