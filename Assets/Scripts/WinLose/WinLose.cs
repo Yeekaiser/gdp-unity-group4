@@ -49,7 +49,7 @@ public class WinLose : MonoBehaviour
 
         Player.GetComponent<PlayerLook>().enabled = false;
         Player.GetComponent<PlayerForward>().enabled = false;
-        Player.GetComponent<JoystickMovement>().enabled = false;
+        //Player.GetComponent<JoystickMovement>().enabled = false;
 
         loseReasonText.text = loseReason;
     }

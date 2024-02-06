@@ -69,7 +69,7 @@ public class ObjectHold : MonoBehaviour
 
         GameObject Object = target.gameObject;
         Object.transform.SetParent(holding.transform);
-        target.GetComponent<Collider>().enabled = false; // Disable the collider when picked up
+        //target.GetComponent<Collider>().enabled = false; // Disable the collider when picked up
         Object.GetComponent<Rigidbody>().isKinematic = true; // Disable physics interactions for the held object
         isHolding = true;
     }
@@ -80,7 +80,7 @@ public class ObjectHold : MonoBehaviour
 
         GameObject Object = holding.transform.GetChild(0).gameObject;
         Object.transform.SetParent(null); // Set the object's parent back to null
-        Object.GetComponent<Collider>().enabled = true; // Enable the collider when dropped
+        //Object.GetComponent<Collider>().enabled = true; // Enable the collider when dropped
         Object.GetComponent<Rigidbody>().isKinematic = false; // Enable physics interactions
         isHolding = false;
     }

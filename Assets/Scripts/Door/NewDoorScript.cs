@@ -27,30 +27,10 @@ public class NewDoorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (hinge.angle < 0 && doorSlamCalled == false)
-        //{
-        //    Debug.Log(hinge.angle);
 
-        //    StartCoroutine(PauseForSeconds(3));
-
-        //    Invoke("DoorSlamClose", 15f);
-        //    doorSlamCalled = true;
-        //}
-
-        //if (scenario.scenario > 3)
-        //{
-        //    JointLimits limits = GetComponent<HingeJoint>().limits;
-
-        //    // Modify the limits
-        //    limits.min = -5;
-        //    limits.max = 90;
-
-        //    // Apply the modified limits back to the HingeJoint
-        //    GetComponent<HingeJoint>().limits = limits;
-        //}
     }
 
-    private void DoorSlamClose()
+    private void DoorLoseCondition()
     {
         if(scenario.scenario == 3)
         {
@@ -61,10 +41,10 @@ public class NewDoorScript : MonoBehaviour
             motor.force = closeForce;
             hinge.motor = motor;
 
-
             doorSlamCalled = false;
             doorSlamNoise = true;
 
+            sound.MakeSound(100);
             winLose.Lose("Wind slammed the door loudly!");
         }
     }
@@ -74,29 +54,27 @@ public class NewDoorScript : MonoBehaviour
         Debug.Log("triggered");
         if (other.gameObject.name == "Doorslam")
             scenario.nextScenario(scenario.scenario, 4);
-       
-        //if (other.gameObject.name == "Doorslam")
-        //    sound.MakeSound(noiseMade);
 
         motor = hinge.motor;
         motor.targetVelocity = 0f;
         hinge.motor = motor;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Player")
         {
-            StartCoroutine(PauseForSecondsSlam(20));
+            StartCoroutine(PauseForSecondsSlam(15));
             scenario.nextScenario(scenario.scenario, 3);
         }
     }
+
     IEnumerator PauseForSecondsSlam(int seconds)
     {
         // Pause for x seconds
         yield return new WaitForSeconds(seconds);
-        //scenario.nextScenario(scenario.scenario, 3);
 
-        DoorSlamClose();
+        DoorLoseCondition();
     }
 
 

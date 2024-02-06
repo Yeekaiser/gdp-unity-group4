@@ -19,7 +19,9 @@ public class SoundMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rectangle.fillAmount = currentNoise / MAX_SOUND;
+        float fillAmount = Mathf.Clamp01(currentNoise / MAX_SOUND);
+        rectangle.fillAmount = fillAmount;
+        //rectangle.fillAmount = currentNoise / MAX_SOUND;
         if (currentNoise > 0)
         {
             currentNoise -= 3f;

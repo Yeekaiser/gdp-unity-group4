@@ -19,7 +19,7 @@ public class Respawnitems : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 resetPosition = collision.transform.position;
-        resetPosition.y = 0f;
+        resetPosition.y = 10f;
         collision.transform.position = resetPosition;
     }
 

@@ -5,12 +5,12 @@ using UnityEngine;
 public class chair_drop : MonoBehaviour
 {
     public AudioSource impactSound;
-
+    public WinLose winLose;
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > 2)
+        if (collision.relativeVelocity.y > 5)
         {
-            //impactSound.Play();
+            winLose.Lose("Dropping the furniture made too much noise!");
             Debug.Log("Impact sound played!");
         }
     }

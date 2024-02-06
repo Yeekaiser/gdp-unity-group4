@@ -15,8 +15,9 @@ public class TVRemoteScript : MonoBehaviour
     
     public float remoteVolDownRate = 5f;
 
-    public GameObject volUp;
-    public GameObject volDown;
+    public GameObject volUI;
+    //public GameObject volUp;
+    //public GameObject volDown;
     public GameObject pointer;
     // Start is called before the first frame update
     void Start()
@@ -29,18 +30,25 @@ public class TVRemoteScript : MonoBehaviour
     {
         if (transform.parent == holding)
         {
-            volUp.SetActive(true);
-            volDown.SetActive(true);
+            volUI.SetActive(true);
+            //volUp.SetActive(true);
+            //volDown.SetActive(true);
+
             TVScreen.SetActive(true);
             pointer.SetActive(true);
             transform.rotation = Quaternion.identity;
+
+            TV.enabled = true;
         }
         if (transform.parent == null)
         {
-            volUp.SetActive(false);
-            volDown.SetActive(false);
+            volUI.SetActive(false);
+            //volUp.SetActive(false);
+            //volDown.SetActive(false);
+
             TVScreen.SetActive(false);
             pointer.SetActive(false);
+            TV.enabled = false;
         }
 
 
