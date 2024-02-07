@@ -37,9 +37,9 @@ public class FriendScript : MonoBehaviour
             case 6: //this is after watching TV, friend about to leave
                     //moves to 6 by opening and closing the door quietly
                 MoveToPosition(beforeLeaveDoorPos.position);
-                Dialogue4.SetActive(false);
-                Dialogue5.SetActive(true);
-                StartCoroutine(PauseForSeconds(4));
+                Dialogue5.SetActive(false);
+                Dialogue6.SetActive(true);
+                //StartCoroutine(PauseForSeconds(4));
                 winLose.Win();
                 break;
             case 5: //this is after the chair is in position, starting to watch TV

@@ -65,7 +65,7 @@ public class ObjectHold : MonoBehaviour
 
     void PickUp(Target target)
     {
-        Debug.Log("pickup called");
+        //Debug.Log("pickup called");
 
         GameObject Object = target.gameObject;
         Object.transform.SetParent(holding.transform);
@@ -76,7 +76,7 @@ public class ObjectHold : MonoBehaviour
 
     void Drop()
     {
-        Debug.Log("drop called");
+        //Debug.Log("drop called");
 
         GameObject Object = holding.transform.GetChild(0).gameObject;
         Object.transform.SetParent(null); // Set the object's parent back to null

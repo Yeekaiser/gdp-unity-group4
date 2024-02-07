@@ -37,68 +37,45 @@ public class TVScript : MonoBehaviour
         StartCoroutine(TvVolUp());
     }
 
-    // Update is called once per frame
-    //void FixedUpdate()
-    //{
-    //    PlayTVSound();
-    //    if(tvIsOn == true)
-    //    {
-    //    }
-    //    if(scenario.scenario == 4)
-    //    {
-    //        TVVolUp();
-    //        //StartCoroutine(PauseForSeconds(20));
-    //    }
-    //}
+    private void Update()
+    {
         
-
-    //void TVVolUp()
-    //{
-    //        tvCurrentVol += tvVolUpRate;
-    //}
-
-    //void PlayTVSound()
-    //{
-        
-    //    if (Time.time - lastTriggerTime >= interval)
-    //    {
-    //        sound.currentNoise += tvCurrentVol;
-
-    //        // Update lastTriggerTime to the current time
-    //        lastTriggerTime = Time.time;
-    //    }
-    //    //Debug.Log(tvCurrentVol);
-        
-    //}
+    }
 
     IEnumerator TvVolUp()
     {
-        while (tvIsOn == true)
+        while (true)
         {
-            if(tvCurrentVol < tvMaxVol)
+            if (tvIsOn == true)
             {
+                //Debug.Log("tvIsOn");
+                if(tvCurrentVol < tvMaxVol)
+                {
+                    //Debug.Log(tvCurrentVol + "is current vol");
 
-                tvCurrentVol += tvVolUpRate;
-                sound.MakeSound(tvCurrentVol);
-                tvVolText.text = "Volume: " + tvCurrentVol.ToString();
-            }
-            else
-            {
-                if (tvCurrentVol >= tvMaxVol)
-                    winLose.Lose("The TV Volme was too loud!");
+                    tvCurrentVol += tvVolUpRate;
+                    sound.MakeSound(tvCurrentVol);
+                    tvVolText.text = "Volume: " + tvCurrentVol.ToString();
+                }
+                else
+                {
+                    if (tvCurrentVol >= tvMaxVol)
+                        winLose.Lose("The TV Volme was too loud!");
+                }
             }
             yield return new WaitForSeconds(interval);
+
         }
     }
 
 
-    IEnumerator PauseForSeconds(int seconds)
-    {
+    //IEnumerator PauseForSeconds(int seconds)
+    //{
 
-        // Pause for 5 seconds
-        yield return new WaitForSeconds(seconds);
+    //    // Pause for 5 seconds
+    //    yield return new WaitForSeconds(seconds);
 
-        scenario.nextScenario(scenario.scenario, 6);
+    //    scenario.nextScenario(scenario.scenario, 6);
 
-    }
+    //}
 }

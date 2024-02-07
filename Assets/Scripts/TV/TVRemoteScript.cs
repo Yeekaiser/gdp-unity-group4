@@ -19,6 +19,8 @@ public class TVRemoteScript : MonoBehaviour
     //public GameObject volUp;
     //public GameObject volDown;
     public GameObject pointer;
+    public FriendScript scenario;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,14 @@ public class TVRemoteScript : MonoBehaviour
             pointer.SetActive(true);
             transform.rotation = Quaternion.identity;
 
-            TV.enabled = true;
+            //TV.enabled = true;
+            TV.tvIsOn = true;
+
+            if(TV.tvIsOn == false)
+            {
+                StartCoroutine(NextScene());
+            }
+
         }
         if (transform.parent == null)
         {
@@ -48,7 +57,9 @@ public class TVRemoteScript : MonoBehaviour
 
             TVScreen.SetActive(false);
             pointer.SetActive(false);
-            TV.enabled = false;
+
+            //TV.enabled = false;
+            TV.tvIsOn = false;
         }
 
 
@@ -96,31 +107,37 @@ public class TVRemoteScript : MonoBehaviour
     }
 
     public void VolDown()
-{
-    if (transform.parent == holding.transform) // If the remote has been picked up by the player
     {
-        if (TV.tvCurrentVol > 0)
+        if (transform.parent == holding.transform) // If the remote has been picked up by the player
         {
-            TV.tvCurrentVol -= remoteVolDownRate;
-        }
-        else
-        {
-            TV.tvCurrentVol = 0; // Prevents the volume from going below 0
-        }
-        TVScreen.SetActive(true); // Assuming you want to show the TV screen whenever volume is adjusted
-        // Additional code to update volume display on TVScreen if needed
-    }
-}
+            if (TV.tvCurrentVol > 0)
+            {
+                TV.tvCurrentVol -= remoteVolDownRate;
+            }
+            else
+            {
+                TV.tvCurrentVol = 0; // Prevents the volume from going below 0
+            }
+            TVScreen.SetActive(true); // Assuming you want to show the TV screen whenever volume is adjusted
 
-public void VolUp()
-{
-    if (transform.parent == holding.transform) // If the remote has been picked up by the player
+            StartCoroutine(NextScene());
+        }
+    }
+
+    public void VolUp()
     {
-        TV.tvCurrentVol += remoteVolDownRate;
-        TVScreen.SetActive(true); // Assuming you want to show the TV screen whenever volume is adjusted
-        // Additional code to update volume display on TVScreen if needed
-        // Make sure to implement a maximum volume limit if necessary
+        if (transform.parent == holding.transform) // If the remote has been picked up by the player
+        {
+            TV.tvCurrentVol += remoteVolDownRate;
+            TVScreen.SetActive(true); // Assuming you want to show the TV screen whenever volume is adjusted
+                                      
+        }
     }
-}
 
+    IEnumerator NextScene()
+    {
+        Debug.LogWarning("nextscene called");
+        yield return new WaitForSeconds(10);
+        scenario.nextScenario(scenario.scenario, 6);
+    }
 }

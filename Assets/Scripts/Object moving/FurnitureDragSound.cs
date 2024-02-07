@@ -26,14 +26,14 @@ public class FurnitureDragSound : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(rb.velocity.magnitude);
+        //Debug.Log(rb.velocity.magnitude);
         if (collision.relativeVelocity.magnitude >= 2)
         {
-            Debug.Log("entered");
+            //Debug.Log("entered");
             //isGrounded = true;
             noiseMadeByDragging += 20;
             sound.MakeSound(noiseMadeByDragging);
-            Debug.Log(sound.currentNoise);
+            //Debug.Log(sound.currentNoise);
         }
         //Debug.Log(gameObject.name + "On the Ground");
 

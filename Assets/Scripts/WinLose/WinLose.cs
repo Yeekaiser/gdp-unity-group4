@@ -28,10 +28,7 @@ public class WinLose : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (sound.currentNoise > 480 && Time.time > 3)
-        //{
-        //    //Lose();
-        //}
+
     }
 
     public void Win()
@@ -39,8 +36,9 @@ public class WinLose : MonoBehaviour
         winpanel.SetActive(true);
 
         Player.GetComponent<PlayerLook>().enabled = false;
-        Player.GetComponent<PlayerMovement>().enabled = false;
-        Player.GetComponent<JoystickMovement>().enabled = false;
+        //Player.GetComponent<PlayerForward>().enabled = false;
+        //Player.GetComponent<JoystickMovement>().enabled = false;
+
     }
 
     public void Lose(string loseReason)
